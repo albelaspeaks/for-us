@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day & Audio Player</title>
+</head>
+<body>
+
+<!-- Audio element (source will be set dynamically) -->
+<audio id="audioPlayer" preload="auto"></audio>
+<audio id="tomorrowAudioPlayer" preload="auto"></audio>
+<audio id="dayAfterTomorrowAudioPlayer" preload="auto"></audio>
+<audio id="dayAfterDayAfterTomorrowAudioPlayer" preload="auto"></audio>
+<audio id="yesterdayAudioPlayer" preload="auto"></audio>
+<audio id="dayBeforeYesterdayAudioPlayer" preload="auto"></audio>
+<audio id="dayBeforeDayBeforeYesterdayAudioPlayer" preload="auto"></audio>
+
+
+<button id="todayPlayButton">बटनं नुदन्तु| Touch Button </button>
+<br><br>
+<button id="tomorrowPlayButton">बटनं नुदन्तु| Touch Button </button>
+<br><br>
+<button id="dayAfterTomorrowPlayButton">बटनं नुदन्तु| Touch Button </button>
+<br><br>
+<button id="dayAfterDayAfterTomorrowPlayButton">बटनं नुदन्तु| Touch Button </button>
+<br><br>
+<br><br>
+<button id="yesterdayPlayButton">बटनं नुदन्तु| Touch Button </button>
+<br><br>
+<button id="dayBeforeYesterdayPlayButton">बटनं नुदन्तु| Touch Button </button>
+<br><br>
+<button id="dayBeforeDayBeforeYesterdayPlayButton">बटनं नुदन्तु| Touch Button </button>
+<br><br>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        //const dayDisplay = document.getElementById("dayDisplay");
+
+        const audioPlayer = document.getElementById("audioPlayer");
+        const tomorrowAudioPlayer = document.getElementById("tomorrowAudioPlayer");
+        const dayAfterTomorrowAudioPlayer = document.getElementById("dayAfterTomorrowAudioPlayer");
+        const dayAfterDayAfterTomorrowAudioPlayer = document.getElementById("dayAfterDayAfterTomorrowAudioPlayer");
+        const yesterdayAudioPlayer = document.getElementById("yesterdayAudioPlayer");
+        const dayBeforeYesterdayAudioPlayer = document.getElementById("dayBeforeYesterdayAudioPlayer");
+        const dayBeforeDayBeforeYesterdayAudioPlayer = document.getElementById("dayBeforeDayBeforeYesterdayAudioPlayer");
+
+        const todayPlayButton = document.getElementById("todayPlayButton");
+        const tomorrowPlayButton = document.getElementById("tomorrowPlayButton");
+        const dayAfterTomorrowPlayButton = document.getElementById("dayAfterTomorrowPlayButton");
+        const dayAfterDayAfterTomorrowPlayButton = document.getElementById("dayAfterDayAfterTomorrowPlayButton");
+        const yesterdayPlayButton = document.getElementById("yesterdayPlayButton");
+        const dayBeforeYesterdayPlayButton = document.getElementById("dayBeforeYesterdayPlayButton");
+        const dayBeforeDayBeforeYesterdayPlayButton = document.getElementById("dayBeforeDayBeforeYesterdayPlayButton");
+
+        let todayAudioFiles = []; // To hold the list of audio files
+        let tomorrowAudioFiles = [];
+        let dayAfterTomorrowAudioFiles = [];
+        let dayAfterDayAfterTomorrowAudioFiles = [];
+        let yesterdayAudioFiles = [];
+        let dayBeforeYesterdayAudioFiles = [];
+        let dayBeforeDayBeforeYesterdayAudioFiles = [];
+
+        let currentAudioIndex = 0; // To keep track of the current audio file in sequence
+        let tomorrowAudioIndex = 0;
+        let dayAfterTomorrowAudioIndex = 0;
+        let dayAfterDayAfterTomorrowAudioIndex = 0;
+        let yesterdayAudioIndex = 0;
+        let dayBeforeYesterdayAudioIndex = 0;
+        let dayBeforeDayBeforeYesterdayAudioIndex = 0;
+
+        function updateDay() {
+            const now = new Date();
+            const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const wasara = ["रवि वासर:", "सोम वासर:", "भौम वासर:", "बुध वासर:", "बृहस्पति वासर:", "शुक्र वासर:", "मन्द वासर:"];
+
+            let nowDay = now.getDay(); //Get today.
+
+            const currentDay = weekdays[nowDay];
+            const tomorrowDay = weekdays[(nowDay+1)%7];
+            const dayAfterTomorrowDay = weekdays[(nowDay+2)%7];
+            const dayAfterDayAfterTomorrowDay = weekdays[(nowDay+3)%7];
+            const yesterdayDay = weekdays[(nowDay-1+7)%7];
+            const dayBeforeYesterdayDay = weekdays[(nowDay-2+7)%7];
+            const dayBeforeDayBeforeYesterdayDay = weekdays[(nowDay-3+7)%7];
+
+            const adhya = wasara[nowDay];
+            const shwaha = wasara[(nowDay+1)%7];
+            const paraShwaha = wasara[(nowDay+2)%7];
+            const praParaShwaha = wasara[(nowDay+3)%7];
+            const hya = wasara[(nowDay-1+7)%7];
+            const paraHya = wasara[(nowDay-2+7)%7];
+            const praParaHya = wasara[(nowDay-3+7)%7];
+
+            todayAudioFiles = [
+                // Assign corresponding audio file
+                `resources/adhya.mp3`,
+                `resources/${currentDay.toLowerCase()}.mp3`
+            ];
+
+            tomorrowAudioFiles = [
+                // Assign corresponding audio file
+                `resources/shwaha.mp3`,
+                `resources/${tomorrowDay.toLowerCase()}.mp3`
+            ];
+
+            dayAfterTomorrowAudioFiles = [
+                // Assign corresponding audio file
+                `resources/paraShwaha.mp3`,
+                `resources/${dayAfterTomorrowDay.toLowerCase()}.mp3`
+            ];
+
+            dayAfterDayAfterTomorrowAudioFiles = [
+                // Assign corresponding audio file
+                `resources/praParaShwaha.mp3`,
+                `resources/${dayAfterDayAfterTomorrowDay.toLowerCase()}.mp3`
+            ];
+
+            yesterdayAudioFiles = [
+                // Assign corresponding audio file
+                `resources/hya.mp3`,
+                `resources/${yesterdayDay.toLowerCase()}.mp3`
+            ];
+
+            dayBeforeYesterdayAudioFiles = [
+                // Assign corresponding audio file
+                `resources/paraHya.mp3`,
+                `resources/${dayBeforeYesterdayDay.toLowerCase()}.mp3`
+            ];
+
+            dayBeforeDayBeforeYesterdayAudioFiles = [
+                // Assign corresponding audio file
+                `resources/praParaHya.mp3`,
+                `resources/${dayBeforeDayBeforeYesterdayDay.toLowerCase()}.mp3`
+            ];
+
+            // Update the button text dynamically
+            todayPlayButton.textContent = `🔊 अद्य ${adhya} | Today is ${currentDay}`;
+            tomorrowPlayButton.textContent = `🔊 श्वः ${shwaha} | Tomorrow will be ${tomorrowDay}`;
+            dayAfterTomorrowPlayButton.textContent = `🔊 परश्वः ${paraShwaha} | Day after tomorrow will be ${dayAfterTomorrowDay}`;
+            dayAfterDayAfterTomorrowPlayButton.textContent = `🔊 प्रपरश्वः ${praParaShwaha} | Day after day after tomorrow will be ${dayAfterDayAfterTomorrowDay}`;
+            yesterdayPlayButton.textContent = `🔊 ह्यः ${hya} | Yesterday was ${yesterdayDay}`;
+            dayBeforeYesterdayPlayButton.textContent = `🔊 परह्यः ${paraHya} | Day before yesterday was ${dayBeforeYesterdayDay}`;
+            dayBeforeDayBeforeYesterdayPlayButton.textContent = `🔊 प्रपरह्यः ${praParaHya} | Day before day before yesterday was ${dayBeforeDayBeforeYesterdayDay}`;
+        }
+        //---------------------------------------------------
+        function playNextAudio() {
+            if (currentAudioIndex < todayAudioFiles.length) {
+                audioPlayer.src = todayAudioFiles[currentAudioIndex]; // Set the next audio file
+                audioPlayer.play(); // Play the audio
+                currentAudioIndex++; // Increment the index for the next audio
+            }
+        }
+        // Event listener to play the next audio once the current one ends
+        audioPlayer.addEventListener("ended", playNextAudio);
+        function playAudioForDay() {
+            currentAudioIndex = 0; // Reset the index to start the first audio
+            playNextAudio(); // Play the first audio file in the sequence
+        }
+        //---------------------------------------------------
+        function playTomorrowNextAudio() {
+            if (tomorrowAudioIndex < tomorrowAudioFiles.length) {
+                tomorrowAudioPlayer.src = tomorrowAudioFiles[tomorrowAudioIndex]; // Set the next audio file
+                tomorrowAudioPlayer.play(); // Play the audio
+                tomorrowAudioIndex++; // Increment the index for the next audio
+            }
+        }
+        // Event listener to play the next audio once the current one ends
+        tomorrowAudioPlayer.addEventListener("ended", playTomorrowNextAudio);
+        function playAudioForTomorrow() {
+            tomorrowAudioIndex = 0; // Reset the index to start the first audio
+            playTomorrowNextAudio(); // Play the first audio file in the sequence
+        }
+        //---------------------------------------------------
+        function playDayAfterTomorrowNextAudio() {
+            if (dayAfterTomorrowAudioIndex < dayAfterTomorrowAudioFiles.length) {
+                dayAfterTomorrowAudioPlayer.src = dayAfterTomorrowAudioFiles[dayAfterTomorrowAudioIndex]; // Set the next audio file
+                dayAfterTomorrowAudioPlayer.play(); // Play the audio
+                dayAfterTomorrowAudioIndex++; // Increment the index for the next audio
+            }
+        }
+        // Event listener to play the next audio once the current one ends
+        dayAfterTomorrowAudioPlayer.addEventListener("ended", playDayAfterTomorrowNextAudio);
+        function playAudioForDayAfterTomorrow() {
+            dayAfterTomorrowAudioIndex = 0; // Reset the index to start the first audio
+            playDayAfterTomorrowNextAudio(); // Play the first audio file in the sequence
+        }
+        //---------------------------------------------------
+        function playDayAfterDayAfterTomorrowNextAudio() {
+            if (dayAfterDayAfterTomorrowAudioIndex < dayAfterDayAfterTomorrowAudioFiles.length) {
+                dayAfterDayAfterTomorrowAudioPlayer.src = dayAfterDayAfterTomorrowAudioFiles[dayAfterDayAfterTomorrowAudioIndex]; // Set the next audio file
+                dayAfterDayAfterTomorrowAudioPlayer.play(); // Play the audio
+                dayAfterDayAfterTomorrowAudioIndex++; // Increment the index for the next audio
+            }
+        }
+        // Event listener to play the next audio once the current one ends
+        dayAfterDayAfterTomorrowAudioPlayer.addEventListener("ended", playDayAfterDayAfterTomorrowNextAudio);
+        function playAudioForDayAfterDayAfterTomorrow() {
+            dayAfterDayAfterTomorrowAudioIndex = 0; // Reset the index to start the first audio
+            playDayAfterDayAfterTomorrowNextAudio(); // Play the first audio file in the sequence
+        }
+        //---------------------------------------------------
+        function playYesterdayNextAudio() {
+            if (yesterdayAudioIndex < yesterdayAudioFiles.length) {
+                yesterdayAudioPlayer.src = yesterdayAudioFiles[yesterdayAudioIndex]; // Set the next audio file
+                yesterdayAudioPlayer.play(); // Play the audio
+                yesterdayAudioIndex++; // Increment the index for the next audio
+            }
+        }
+        // Event listener to play the next audio once the current one ends
+        yesterdayAudioPlayer.addEventListener("ended", playYesterdayNextAudio);
+        function playAudioForYesterday() {
+            yesterdayAudioIndex = 0; // Reset the index to start the first audio
+            playYesterdayNextAudio(); // Play the first audio file in the sequence
+        }
+        //---------------------------
+        function playDayBeforeYesterdayNextAudio() {
+            if (dayBeforeYesterdayAudioIndex < dayBeforeYesterdayAudioFiles.length) {
+                dayBeforeYesterdayAudioPlayer.src = dayBeforeYesterdayAudioFiles[dayBeforeYesterdayAudioIndex]; // Set the next audio file
+                dayBeforeYesterdayAudioPlayer.play(); // Play the audio
+                dayBeforeYesterdayAudioIndex++; // Increment the index for the next audio
+            }
+        }
+        // Event listener to play the next audio once the current one ends
+        dayBeforeYesterdayAudioPlayer.addEventListener("ended", playDayBeforeYesterdayNextAudio);
+        function playAudioForDayBeforeYesterday() {
+            dayBeforeYesterdayAudioIndex = 0; // Reset the index to start the first audio
+            playDayBeforeYesterdayNextAudio(); // Play the first audio file in the sequence
+        }
+        //---------------------------
+        function playDayBeforeDayBeforeYesterdayNextAudio() {
+            if (dayBeforeDayBeforeYesterdayAudioIndex < dayBeforeDayBeforeYesterdayAudioFiles.length) {
+                dayBeforeDayBeforeYesterdayAudioPlayer.src = dayBeforeDayBeforeYesterdayAudioFiles[dayBeforeDayBeforeYesterdayAudioIndex]; // Set the next audio file
+                dayBeforeDayBeforeYesterdayAudioPlayer.play(); // Play the audio
+                dayBeforeDayBeforeYesterdayAudioIndex++; // Increment the index for the next audio
+            }
+        }
+        // Event listener to play the next audio once the current one ends
+        dayBeforeDayBeforeYesterdayAudioPlayer.addEventListener("ended", playDayBeforeDayBeforeYesterdayNextAudio);
+        function playAudioForDayBeforeDayBeforeYesterday() {
+            dayBeforeDayBeforeYesterdayAudioIndex = 0; // Reset the index to start the first audio
+            playDayBeforeDayBeforeYesterdayNextAudio(); // Play the first audio file in the sequence
+        }
+        //---------------------------
+        updateDay(); // Display day immediately
+        todayPlayButton.addEventListener("click", playAudioForDay); // Play audio on button click
+        tomorrowPlayButton.addEventListener("click", playAudioForTomorrow); // Play audio on button click
+        dayAfterTomorrowPlayButton.addEventListener("click", playAudioForDayAfterTomorrow); // Play audio on button click
+        dayAfterDayAfterTomorrowPlayButton.addEventListener("click", playAudioForDayAfterDayAfterTomorrow); // Play audio on button click
+        yesterdayPlayButton.addEventListener("click", playAudioForYesterday); // Play audio on button click
+        dayBeforeYesterdayPlayButton.addEventListener("click", playAudioForDayBeforeYesterday); // Play audio on button click
+        dayBeforeDayBeforeYesterdayPlayButton.addEventListener("click", playAudioForDayBeforeDayBeforeYesterday); // Play audio on button click
+    });
+</script>
+
+<a href="https://www.albelaspeaks.com">
+    <br><br><br><button>गृहं प्रति पुनः | <b>BACK HOME</b></button><br>
+</a>
+<br>
+</body>
+</html>
