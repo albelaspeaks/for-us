@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>हिन्दू ज्योतिष कुंडली JSON निर्माणं कुरुत [www.albelaspeaks.com]</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    #inputs, #constellationInput {
+      margin-top: 20px;
+    }
+    div {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>हिन्दू ज्योतिष कुंडली JSON निर्माणं कुरुत|</h1>
+
+<div id="inputs"></div>
+
+<div id="constellationInput">
+  <h3>नक्षत्रं तस्य गृहं च चिनुत|</h3>
+  <label for="constellation">नक्षत्रं चिनोतु | Nakshara: </label>
+  <select id="constellation">
+    <option value="">-- Select Nakshatra --</option>
+    <option value="Ashwini">अश्विनी (Ashwini)</option>
+    <option value="Bharani">वृषभ (Bharani)</option>
+    <option value="Krittika">कृतिका (Krittika)</option>
+    <option value="Rohini">रोहिणी (Rohini)</option>
+    <option value="Mrigashira">मृगशीर्ष (Mrigashira)</option>
+    <option value="Ardra">आर्द्रा (Ardra)</option>
+    <option value="Punarvasu">पुनर्वसु (Punarvasu)</option>
+    <option value="Pushya">पुष्य (Pushya)</option>
+    <option value="Ashlesha">आश्लेषा (Ashlesha)</option>
+    <option value="Magha">मघा (Magha)</option>
+    <option value="Purva Phalguni">पूर्वाफल्गुनी (Purvaphalguni)</option>
+    <option value="Uttara Phalguni">उत्तराफल्गुनी (Uttaraphalguni)</option>
+    <option value="Hasta">हस्त (Hasta)</option>
+    <option value="Chitra">चित्रा (Chitra)</option>
+    <option value="Swati">स्वाती (Swati)</option>
+    <option value="Vishakha">विशाखा (Vishakha)</option>
+    <option value="Anuradha">अनुराधा (Anuradha)</option>
+    <option value="Jyeshtha">ज्येष्ठा (Jyeshtha)</option>
+    <option value="Mula">मूल (Mula)</option>
+    <option value="Purva Ashadha">पूर्वाषाढ़ा (Purvashadha)</option>
+    <option value="Uttara Ashadha">उत्तराषाढ़ा (Uttarashadha)</option>
+    <option value="Shravana">श्रवण (Shravana)</option>
+    <option value="Dhanishta">धनिष्ठा (Dhanishta)</option>
+    <option value="Shatabhisha">शतभिषा (Shatabhisha)</option>
+    <option value="Purva Bhadrapada">पूर्वभाद्रपदा (Purvabhadrapada)</option>
+    <option value="Uttara Bhadrapada">उत्तरभाद्रपदा (Uttarabhadrapada)</option>
+    <option value="Revati">रेवती (Revati)</option>
+  </select>
+
+  <label for="houseOfConstellation">भावं चिनोतु | House: </label>
+  <select id="houseOfConstellation">
+    <option value="">-- भावं चिनुत | Select House --</option>
+    <option value="1">भाव | House 1</option>
+    <option value="2">भाव | House 2</option>
+    <option value="3">भाव | House 3</option>
+    <option value="4">भाव | House 4</option>
+    <option value="5">भाव | House 5</option>
+    <option value="6">भाव | House 6</option>
+    <option value="7">भाव | House 7</option>
+    <option value="8">भाव | House 8</option>
+    <option value="9">भाव | House 9</option>
+    <option value="10">भाव | House 10</option>
+    <option value="11">भाव | House 11</option>
+    <option value="12">भाव | House 12</option>
+  </select>
+
+  <div id="planetHouseInput">
+    <h3>प्रत्येकं ग्रहस्य कृते भावं चिनोतु:</h3>
+    <div>
+      <label for="houseOfSun">सूर्यस्य भावं चिनुत | Sun: </label>
+      <select id="houseOfSun">
+        <option value="">-- भावं चिनुत | Select House --</option>
+        <option value="1">भाव | House 1</option>
+        <option value="2">भाव | House 2</option>
+        <option value="3">भाव | House 3</option>
+        <option value="4">भाव | House 4</option>
+        <option value="5">भाव | House 5</option>
+        <option value="6">भाव | House 6</option>
+        <option value="7">भाव | House 7</option>
+        <option value="8">भाव | House 8</option>
+        <option value="9">भाव | House 9</option>
+        <option value="10">भाव | House 10</option>
+        <option value="11">भाव | House 11</option>
+        <option value="12">भाव | House 12</option>
+      </select>
+    </div>
+    <div>
+      <label for="houseOfMoon">शशाङ्कस्य भावं चिनुत | Moon: </label>
+      <select id="houseOfMoon">
+        <option value="">-- भावं चिनुत | Select House --</option>
+        <option value="1">भाव | House 1</option>
+        <option value="2">भाव | House 2</option>
+        <option value="3">भाव | House 3</option>
+        <option value="4">भाव | House 4</option>
+        <option value="5">भाव | House 5</option>
+        <option value="6">भाव | House 6</option>
+        <option value="7">भाव | House 7</option>
+        <option value="8">भाव | House 8</option>
+        <option value="9">भाव | House 9</option>
+        <option value="10">भाव | House 10</option>
+        <option value="11">भाव | House 11</option>
+        <option value="12">भाव | House 12</option>
+      </select>
+    </div>
+    <div>
+      <label for="houseOfMars">भौमस्य भावं चिनुत | Mars: </label>
+      <select id="houseOfMars">
+        <option value="">-- भावं चिनुत | Select House --</option>
+        <option value="1">भाव | House 1</option>
+        <option value="2">भाव | House 2</option>
+        <option value="3">भाव | House 3</option>
+        <option value="4">भाव | House 4</option>
+        <option value="5">भाव | House 5</option>
+        <option value="6">भाव | House 6</option>
+        <option value="7">भाव | House 7</option>
+        <option value="8">भाव | House 8</option>
+        <option value="9">भाव | House 9</option>
+        <option value="10">भाव | House 10</option>
+        <option value="11">भाव | House 11</option>
+        <option value="12">भाव | House 12</option>
+      </select>
+    </div>
+    <div>
+      <label for="houseOfJupiter">बृहस्पतिस्य भावं चिनुत | Jupiter: </label>
+      <select id="houseOfJupiter">
+        <option value="">-- भावं चिनुत | Select House --</option>
+        <option value="1">भाव | House 1</option>
+        <option value="2">भाव | House 2</option>
+        <option value="3">भाव | House 3</option>
+        <option value="4">भाव | House 4</option>
+        <option value="5">भाव | House 5</option>
+        <option value="6">भाव | House 6</option>
+        <option value="7">भाव | House 7</option>
+        <option value="8">भाव | House 8</option>
+        <option value="9">भाव | House 9</option>
+        <option value="10">भाव | House 10</option>
+        <option value="11">भाव | House 11</option>
+        <option value="12">भाव | House 12</option>
+      </select>
+    </div>
+    <div>
+      <label for="houseOfMercury">बुधस्य भावं चिनुत | Mercury: </label>
+      <select id="houseOfMercury">
+        <option value="">-- भावं चिनुत | Select House --</option>
+        <option value="1">भाव | House 1</option>
+        <option value="2">भाव | House 2</option>
+        <option value="3">भाव | House 3</option>
+        <option value="4">भाव | House 4</option>
+        <option value="5">भाव | House 5</option>
+        <option value="6">भाव | House 6</option>
+        <option value="7">भाव | House 7</option>
+        <option value="8">भाव | House 8</option>
+        <option value="9">भाव | House 9</option>
+        <option value="10">भाव | House 10</option>
+        <option value="11">भाव | House 11</option>
+        <option value="12">भाव | House 12</option>
+      </select>
+    </div>
+    <div>
+      <label for="houseOfVenus">शुक्रस्य भावं चिनुत | Venus: </label>
+      <select id="houseOfVenus">
+        <option value="">-- भावं चिनुत | Select House --</option>
+        <option value="1">भाव | House 1</option>
+        <option value="2">भाव | House 2</option>
+        <option value="3">भाव | House 3</option>
+        <option value="4">भाव | House 4</option>
+        <option value="5">भाव | House 5</option>
+        <option value="6">भाव | House 6</option>
+        <option value="7">भाव | House 7</option>
+        <option value="8">भाव | House 8</option>
+        <option value="9">भाव | House 9</option>
+        <option value="10">भाव | House 10</option>
+        <option value="11">भाव | House 11</option>
+        <option value="12">भाव | House 12</option>
+      </select>
+    </div>
+    <div>
+      <label for="houseOfSaturn">शनिस्य भावं चिनुत | Saturn: </label>
+      <select id="houseOfSaturn">
+        <option value="">-- भावं चिनुत | Select House --</option>
+        <option value="1">भाव | House 1</option>
+        <option value="2">भाव | House 2</option>
+        <option value="3">भाव | House 3</option>
+        <option value="4">भाव | House 4</option>
+        <option value="5">भाव | House 5</option>
+        <option value="6">भाव | House 6</option>
+        <option value="7">भाव | House 7</option>
+        <option value="8">भाव | House 8</option>
+        <option value="9">भाव | House 9</option>
+        <option value="10">भाव | House 10</option>
+        <option value="11">भाव | House 11</option>
+        <option value="12">भाव | House 12</option>
+      </select>
+    </div>
+    <div>
+      <label for="houseOfRahu">राहुस्य भावं चिनुत | Rahu: </label>
+      <select id="houseOfRahu">
+        <option value="">-- भावं चिनुत | Select House --</option>
+        <option value="1">भाव | House 1</option>
+        <option value="2">भाव | House 2</option>
+        <option value="3">भाव | House 3</option>
+        <option value="4">भाव | House 4</option>
+        <option value="5">भाव | House 5</option>
+        <option value="6">भाव | House 6</option>
+        <option value="7">भाव | House 7</option>
+        <option value="8">भाव | House 8</option>
+        <option value="9">भाव | House 9</option>
+        <option value="10">भाव | House 10</option>
+        <option value="11">भाव | House 11</option>
+        <option value="12">भाव | House 12</option>
+      </select>
+    </div>
+    <div>
+      <label for="houseOfKetu">केतुः भावं चिनुत | Ketu: </label>
+      <select id="houseOfKetu">
+        <option value="">-- भावं चिनुत | Select House --</option>
+        <option value="1">भाव | House 1</option>
+        <option value="2">भाव | House 2</option>
+        <option value="3">भाव | House 3</option>
+        <option value="4">भाव | House 4</option>
+        <option value="5">भाव | House 5</option>
+        <option value="6">भाव | House 6</option>
+        <option value="7">भाव | House 7</option>
+        <option value="8">भाव | House 8</option>
+        <option value="9">भाव | House 9</option>
+        <option value="10">भाव | House 10</option>
+        <option value="11">भाव | House 11</option>
+        <option value="12">भाव | House 12</option>
+      </select>
+    </div>
+
+  <button onclick="generateJSON()">अवाहरन
+    जावा लिपि वस्तु संकेतन (Download JSON)</button>
+</div>
+
+<script>
+  function generateJSON() {
+    const constellation = document.getElementById("constellation").value;
+    const houseOfConstellation = document.getElementById("houseOfConstellation").value;
+    const houseOfSun = document.getElementById("houseOfSun").value;
+    const houseOfMoon = document.getElementById("houseOfMoon").value;
+    const houseOfMars = document.getElementById("houseOfMars").value;
+    const houseOfJupiter = document.getElementById("houseOfJupiter").value;
+    const houseOfMercury = document.getElementById("houseOfMercury").value;
+    const houseOfVenus = document.getElementById("houseOfVenus").value;
+    const houseOfSaturn = document.getElementById("houseOfSaturn").value;
+    const houseOfRahu = document.getElementById("houseOfRahu").value;
+    const houseOfKetu = document.getElementById("houseOfKetu").value;
+
+    if (
+            constellation &&
+            houseOfConstellation &&
+            houseOfSun &&
+            houseOfMoon &&
+            houseOfMars &&
+            houseOfJupiter &&
+            houseOfMercury &&
+            houseOfVenus &&
+            houseOfSaturn &&
+            houseOfRahu &&
+            houseOfKetu
+    ) {
+      const jsonData = {
+        [constellation]: houseOfConstellation,
+        ["Sun"]: houseOfSun,
+        ["Moon"]: houseOfMoon,
+        ["Mars"]: houseOfMars,
+        ["Jupiter"]: houseOfJupiter,
+        ["Mercury"]: houseOfMercury,
+        ["Venus"]: houseOfVenus,
+        ["Saturn"]: houseOfSaturn,
+        ["Rahu"]: houseOfRahu,
+        ["Ketu"]: houseOfKetu
+      };
+
+      // Convert JSON object to string
+      const jsonString = JSON.stringify(jsonData, null, 2);
+
+      // Create a Blob from the JSON string
+      const blob = new Blob([jsonString], { type: "application/json" });
+
+      // Create a link element
+      const link = document.createElement("a");
+
+      // Set the download attribute with a filename
+      link.download = "kundli_data.json";
+
+      // Create an object URL for the Blob and set it as the href attribute of the link
+      link.href = URL.createObjectURL(blob);
+
+      // Programmatically click the link to trigger the download
+      link.click();
+
+      alert("JSON file has been downloaded.");
+    } else {
+      alert("Please select both a Constellation and a House.");
+    }
+  }
+</script>
+  <a href="https://www.albelaspeaks.com">
+    <br><br><br><button>गृहं प्रति पुनः | <b>BACK HOME</b></button><br>
+  </a>
+  <br>
+</body>
+</html>
