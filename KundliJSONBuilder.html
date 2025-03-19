@@ -59,27 +59,22 @@
 </div>
 
   <div id="raashiInput">
-    <h3>राशी तस्य गृहं च|</h3>
+    <h3>तव राशी|</h3>
     <label for="raashi">राशीं चिनोतु | Moon Sign: </label>
     <select id="raashi">
       <option value="">-- Select Moon Sign --</option>
-      <option value="Ashwini">अश्विनी (Ashwini)</option>
-    </select>
-    <label for="houseOfRaashi">भावं चिनोतु | House: </label>
-    <select id="houseOfRaashi">
-      <option value="">-- भावं चिनुत | Select House --</option>
-      <option value="1">भाव | House 1</option>
-      <option value="2">भाव | House 2</option>
-      <option value="3">भाव | House 3</option>
-      <option value="4">भाव | House 4</option>
-      <option value="5">भाव | House 5</option>
-      <option value="6">भाव | House 6</option>
-      <option value="7">भाव | House 7</option>
-      <option value="8">भाव | House 8</option>
-      <option value="9">भाव | House 9</option>
-      <option value="10">भाव | House 10</option>
-      <option value="11">भाव | House 11</option>
-      <option value="12">भाव | House 12</option>
+      <option value="Aries">मेष (Mesha) – Aries</option>
+      <option value="Taurus">वृषभ (Vrishabha) – Taurus</option>
+      <option value="Gemini">मिथुन (Mithuna) – Gemini</option>
+      <option value="Cancer">कर्क (Karka) – Cancer</option>
+      <option value="Leo">सिंह (Simha) – Leo</option>
+      <option value="Virgo">कन्या (Kanya) – Virgo</option>
+      <option value="Libra">तुला (Tula) – Libra</option>
+      <option value="Scorpio">वृश्चिक (Vrishchika) – Scorpio</option>
+      <option value="Sagittarius">धनु (Dhanu) – Sagittarius</option>
+      <option value="Capricorn">मकर (Makara) – Capricorn</option>
+      <option value="Aquarius">कुंभ (Kumbha) – Aquarius</option>
+      <option value="Pisces">मीना (Meena) – Pisces</option>
     </select>
   </div>
 
@@ -256,7 +251,6 @@
   function generateJSON() {
     const constellation = document.getElementById("constellation").value;
     const raashi = document.getElementById("raashi").value;
-    const houseOfRaashi = document.getElementById("houseOfRaashi").value;
     const houseOfSun = document.getElementById("houseOfSun").value;
     const houseOfMoon = document.getElementById("houseOfMoon").value;
     const houseOfMars = document.getElementById("houseOfMars").value;
@@ -270,7 +264,6 @@
     if (
             constellation &&
             raashi &&
-            houseOfRaashi &&
             houseOfSun &&
             houseOfMoon &&
             houseOfMars &&
@@ -283,7 +276,7 @@
     ) {
       const jsonData = {
         ["constellation"]: constellation,
-        [raashi]: houseOfRaashi,
+        ["raashi"]: raashi,
         ["Sun"]: houseOfSun,
         ["Moon"]: houseOfMoon,
         ["Mars"]: houseOfMars,
@@ -323,6 +316,6 @@
     <br><br><br><button>गृहं प्रति पुनः | <b>BACK HOME</b></button><br>
   </a>
   <br>
-  <sub>Astrology, known as Jyotisha in Hindu tradition, is one of the oldest ancient Indian sciences that studies the positions and movements of celestial bodies to understand their influence on human affairs. Rooted in Vedic wisdom, it has been practiced for thousands of years to provide insights into life’s patterns, relationships, and spiritual growth.</sub>
+<sub>Astrology, known as Jyotisha in Hindu tradition, is one of the oldest ancient Indian sciences that studies the positions and movements of celestial bodies to understand their influence on human affairs. Rooted in Vedic wisdom, it has been practiced for thousands of years to provide insights into life’s patterns, relationships, and spiritual growth.</sub>
 </body>
 </html>
