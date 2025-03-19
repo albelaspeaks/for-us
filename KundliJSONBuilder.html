@@ -24,7 +24,7 @@
 <div id="inputs"></div>
 
 <div id="constellationInput">
-  <h3>नक्षत्रं तस्य गृहं च चिनुत|</h3>
+  <h3>तव नक्षत्रं|</h3>
   <label for="constellation">नक्षत्रं चिनोतु | Nakshara: </label>
   <select id="constellation">
     <option value="">-- Select Nakshatra --</option>
@@ -56,26 +56,35 @@
     <option value="Uttara Bhadrapada">उत्तरभाद्रपदा (Uttarabhadrapada)</option>
     <option value="Revati">रेवती (Revati)</option>
   </select>
+</div>
 
-  <label for="houseOfConstellation">भावं चिनोतु | House: </label>
-  <select id="houseOfConstellation">
-    <option value="">-- भावं चिनुत | Select House --</option>
-    <option value="1">भाव | House 1</option>
-    <option value="2">भाव | House 2</option>
-    <option value="3">भाव | House 3</option>
-    <option value="4">भाव | House 4</option>
-    <option value="5">भाव | House 5</option>
-    <option value="6">भाव | House 6</option>
-    <option value="7">भाव | House 7</option>
-    <option value="8">भाव | House 8</option>
-    <option value="9">भाव | House 9</option>
-    <option value="10">भाव | House 10</option>
-    <option value="11">भाव | House 11</option>
-    <option value="12">भाव | House 12</option>
-  </select>
+  <div id="raashiInput">
+    <h3>राशी तस्य गृहं च|</h3>
+    <label for="raashi">राशीं चिनोतु | Moon Sign: </label>
+    <select id="raashi">
+      <option value="">-- Select Moon Sign --</option>
+      <option value="Ashwini">अश्विनी (Ashwini)</option>
+    </select>
+    <label for="houseOfRaashi">भावं चिनोतु | House: </label>
+    <select id="houseOfRaashi">
+      <option value="">-- भावं चिनुत | Select House --</option>
+      <option value="1">भाव | House 1</option>
+      <option value="2">भाव | House 2</option>
+      <option value="3">भाव | House 3</option>
+      <option value="4">भाव | House 4</option>
+      <option value="5">भाव | House 5</option>
+      <option value="6">भाव | House 6</option>
+      <option value="7">भाव | House 7</option>
+      <option value="8">भाव | House 8</option>
+      <option value="9">भाव | House 9</option>
+      <option value="10">भाव | House 10</option>
+      <option value="11">भाव | House 11</option>
+      <option value="12">भाव | House 12</option>
+    </select>
+  </div>
 
   <div id="planetHouseInput">
-    <h3>प्रत्येकं ग्रहस्य कृते भावं चिनोतु:</h3>
+    <h3>प्रत्येकं ग्रहस्य कृते भावं|</h3>
     <div>
       <label for="houseOfSun">सूर्यस्य भावं चिनुत | Sun: </label>
       <select id="houseOfSun">
@@ -246,7 +255,8 @@
 <script>
   function generateJSON() {
     const constellation = document.getElementById("constellation").value;
-    const houseOfConstellation = document.getElementById("houseOfConstellation").value;
+    const raashi = document.getElementById("raashi").value;
+    const houseOfRaashi = document.getElementById("houseOfRaashi").value;
     const houseOfSun = document.getElementById("houseOfSun").value;
     const houseOfMoon = document.getElementById("houseOfMoon").value;
     const houseOfMars = document.getElementById("houseOfMars").value;
@@ -259,7 +269,8 @@
 
     if (
             constellation &&
-            houseOfConstellation &&
+            raashi &&
+            houseOfRaashi &&
             houseOfSun &&
             houseOfMoon &&
             houseOfMars &&
@@ -271,7 +282,8 @@
             houseOfKetu
     ) {
       const jsonData = {
-        [constellation]: houseOfConstellation,
+        ["constellation"]: constellation,
+        [raashi]: houseOfRaashi,
         ["Sun"]: houseOfSun,
         ["Moon"]: houseOfMoon,
         ["Mars"]: houseOfMars,
