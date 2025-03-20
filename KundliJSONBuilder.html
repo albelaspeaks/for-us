@@ -1,7 +1,17 @@
+<!-- || Aum Shree Ganeshaay Nama: || -->
+<!-- || Aum Shree Hanumatey Nama: || -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="author" content="Jani Softwares - Anup Jani" />
   <meta charset="UTF-8">
+  <meta name="description" content="Create your Hindu astrology Kundli in JSON format with detailed house placements for Sun, Moon, Mars, Venus, and other planets. Get insights into your astrological profile and download it easily.">
+  <meta name="keywords" content="Hindu astrology, astrology, Kundli, JSON Kundli, Vedic astrology, planetary positions, moon sign, horoscope, nakshatra, astrological houses, astrology chart, Vedic horoscope, Sun sign, Moon sign, planetary house placement">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Jani Softwares - Anup Jani">
+  <meta name="language" content="en">
+  <meta name="subject" content="Astrology, Hindu, Vedic, Kundli">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>हिन्दू ज्योतिष कुंडली JSON निर्माणं कुरुत [www.albelaspeaks.com]</title>
   <style>
@@ -15,14 +25,33 @@
     div {
       margin-bottom: 10px;
     }
+    #customAlert {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #f9f9f9;
+      padding: 20px;
+      border: 1px solid #ccc;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 9999;
+    }
+    #customAlert input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
-
-<h1>हिन्दू ज्योतिष कुंडली JSON निर्माणं कुरुत|</h1>
-
+<script>let jsonString = "JSON_EMPTY";</script>
+<h1><span style="color: red; ">हिन्दू ज्योतिष कुंडली JSON निर्माणं कुरुत|</span></h1>
+<a href="https://albelaspeaks.com/astro-group/">
+  <br><br><br><button>गृहं प्रति पुनः | <b>BACK HOME</b></button><br>
+</a>
 <div id="inputs"></div>
-
 <div id="constellationInput">
   <h3>तव नक्षत्रं|</h3>
   <label for="constellation">नक्षत्रं चिनोतु | Nakshara: </label>
@@ -242,9 +271,6 @@
         <option value="12">भाव | House 12</option>
       </select>
     </div>
-
-  <button onclick="generateJSON()">अवाहरन
-    जावा लिपि वस्तु संकेतन (Download JSON)</button>
 </div>
 
 <script>
@@ -287,35 +313,57 @@
         ["Rahu"]: houseOfRahu,
         ["Ketu"]: houseOfKetu
       };
-
       // Convert JSON object to string
-      const jsonString = JSON.stringify(jsonData, null, 2);
-
-      // Create a Blob from the JSON string
-      const blob = new Blob([jsonString], { type: "application/json" });
-
-      // Create a link element
-      const link = document.createElement("a");
-
-      // Set the download attribute with a filename
-      link.download = "kundli_data.json";
-
-      // Create an object URL for the Blob and set it as the href attribute of the link
-      link.href = URL.createObjectURL(blob);
-
-      // Programmatically click the link to trigger the download
-      link.click();
-
-      alert("JSON file has been downloaded.");
-    } else {
-      alert("Please select both a Constellation and a House.");
+      jsonString = JSON.stringify(jsonData, null, 2);
     }
   }
-</script>
-  <a href="https://albelaspeaks.com/kundli">
-    <br><br><br><button>गृहं प्रति पुनः | <b>BACK HOME</b></button><br>
-  </a>
+  function downloadJSON() {
+    generateJSON();
+    alert(jsonString);
+    if (jsonString === "JSON_EMPTY") {
+      alert("Please select all options.");
+    }
+    else {
+      // Create a Blob from the JSON string
+      const blob = new Blob([jsonString], {type: "application/json"});
+      // Create a link element
+      const link = document.createElement("a");
+      // Set the download attribute with a filename
+      link.download = "kundli_data.json";
+      // Create an object URL for the Blob and set it as the href attribute of the link
+      link.href = URL.createObjectURL(blob);
+      // Programmatically click the link to trigger the download
+      link.click();
+    }
+  }
+
+  </script>
   <br>
-<sub>Astrology, known as Jyotisha in Hindu tradition, is one of the oldest ancient Indian sciences that studies the positions and movements of celestial bodies to understand their influence on human affairs. Rooted in Vedic wisdom, it has been practiced for thousands of years to provide insights into life’s patterns, relationships, and spiritual growth.</sub>
+  <button onclick="downloadJSON()">अवाहरन जावा लिपि वस्तु संकेतन (Download JSON)</button>
+  <button onclick="showCustomAlert()">Generate Chat GPT Prompt</button>
+  <div id="customAlert">
+    <div id="message">JSON file has been downloaded.<br>Your ChatGPT Promptas below!</div>
+    <input type="text" value="VALUE_EMPTY" id="selectableText" readonly>
+    <button onclick="closeCustomAlert()">Close</button>
+  </div>
+  <script>
+    function showCustomAlert() {
+      generateJSON();
+      if(jsonString === "JSON_EMPTY") {
+        alert("Please select all options.");
+      }
+      else {
+        alert("Preparing String");
+        selectableText.value = "Here is the JSON for Hindu kundli. The Number indicates house (Bhaav). Give basic astrological analysis in Gujarati language.\n" + jsonString;
+        document.getElementById('customAlert').style.display = 'block';
+        alert(selectableText.value);
+      }
+      function closeCustomAlert() {
+        document.getElementById('customAlert').style.display = 'none';
+      }
+    }
+  </script>
 </body>
 </html>
+<br><sub><i>Astrology, known as Jyotisha in Hindu tradition, is one of the oldest ancient Indian sciences that studies the positions and movements of celestial bodies to understand their influence on human affairs. Rooted in Vedic wisdom, it has been practiced for thousands of years to provide insights into life’s patterns, relationships, and spiritual growth.</i></sub><br>
+<i>Created by <a href="https://www.linkedin.com/in/anupjani/">Anup Jani</a> (<a href="https://janisoftwares.wordpress.com/">Jani Softwares)</a></i>
