@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>હિંદુ-પૌરાણિક માપપ્રણાલી કન્વર્ટર</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f1ea;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 0 15px rgba(0,0,0,0.15);
+}
+
+h1{
+    text-align:center;
+    color:#7b1113;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#666;
+    margin-bottom:25px;
+}
+
+.controls{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr auto;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+input,select,button{
+    padding:12px;
+    font-size:16px;
+}
+
+button{
+    background:#7b1113;
+    color:white;
+    border:none;
+    cursor:pointer;
+    border-radius:6px;
+}
+
+button:hover{
+    background:#a3171a;
+}
+
+.info-box{
+    background:#fff8e7;
+    border-left:5px solid #d4a017;
+    padding:10px;
+    margin-bottom:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#7b1113;
+    color:white;
+    padding:10px;
+}
+
+td{
+    padding:8px;
+    border:1px solid #ddd;
+}
+
+tr:nth-child(even){
+    background:#fafafa;
+}
+
+.footer{
+    margin-top:20px;
+    font-size:14px;
+    color:#555;
+}
+
+@media(max-width:800px){
+    .controls{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>હિંદુ-પૌરાણિક માપપ્રણાલી કન્વર્ટર</h1>
+
+<div class="subtitle">
+ગુજરાતી • English Transliteration • અર્થ સાથે
+</div>
+
+<div class="controls">
+
+<select id="category" onchange="loadUnits()">
+    <option value="length">લંબાઈ / અંતર</option>
+    <option value="weight">વજન</option>
+    <option value="volume">ધાન્ય / આયતન</option>
+</select>
+
+<input type="number" id="value" value="1" step="any">
+
+<select id="unit"></select>
+
+<button onclick="convertUnits()">રૂપાંતર કરો</button>
+
+</div>
+
+<div class="info-box" id="baseInfo"></div>
+
+<div class="info-box">
+<b>વર્તમાન રૂપાંતર ધોરણો</b><br>
+1 અંગુલ = 1.9 cm<br>
+1 રત્તિ = 0.1215 g
+</div>
+
+<div id="results"></div>
+
+<div class="footer">
+આધાર ધોરણો:
+
+• 1 અંગુલ = 1.9 સેન્ટીમીટર
+• 1 રત્તિ = 0.1215 ગ્રામ
+
+નોંધ:
+પ્રાચીન માપોમાં પ્રદેશ અને ગ્રંથ પ્રમાણે ફેરફાર જોવા મળે છે.
+આ કાર્યક્રમ સામાન્ય રીતે સ્વીકારાયેલા મૂલ્યોનો ઉપયોગ કરે છે.</div>
+
+</div>
+
+<script>
+
+const categories = {
+
+length: {
+base:"અંગુલ",
+description:"લંબાઈ અને અંતર માપન પ્રણાલી",
+units:[
+
+{name:"પરમાણુ", eng:"Paramanu", meaning:"અતિસૂક્ષ્મ કણ", value:1/(8**7)},
+{name:"ત્રસરેણુ", eng:"Trasarenu", meaning:"ધૂળકણ", value:1/(8**6)},
+{name:"રથરેણુ", eng:"Ratharenu", meaning:"રથની ધૂળ", value:1/(8**5)},
+{name:"વાલાગ્ર", eng:"Valagra", meaning:"વાળનું અગ્રભાગ", value:1/(8**4)},
+{name:"લીક્ષા", eng:"Liksha", meaning:"સૂક્ષ્મ જીવ", value:1/(8**3)},
+{name:"યૂકા", eng:"Yuka", meaning:"જૂં", value:1/(8**2)},
+{name:"યવ", eng:"Yava", meaning:"જવનું દાણું", value:1/8},
+
+{name:"અંગુલ", eng:"Angula", meaning:"આંગળીની જાડાઈ", value:1},
+
+{name:"કળા", eng:"Kala", meaning:"શરીર માપ", value:2},
+{name:"પર્વ", eng:"Parva", meaning:"આંગળીનો ગાંઠ ભાગ", value:3},
+{name:"મુષ્ટિ", eng:"Mushti", meaning:"મુઠ્ઠી", value:4},
+{name:"તળ", eng:"Tala", meaning:"હથેળી આધારિત", value:5},
+{name:"કરપાદ", eng:"Karapada", meaning:"પાઠભેદ", value:6},
+{name:"દ્રષ્ટિ", eng:"Drishti", meaning:"પાઠભેદ", value:7},
+{name:"તૃણી", eng:"Truni", meaning:"પાઠભેદ", value:8},
+{name:"પ્રાદેશ", eng:"Pradesha", meaning:"હાથ વિસ્તાર", value:9},
+{name:"સયતાળ", eng:"Sayatala", meaning:"પાઠભેદ", value:10},
+{name:"ગોકર્ણ", eng:"Gokarna", meaning:"પાઠભેદ", value:11},
+
+{name:"વિતસ્તી", eng:"Vitasti", meaning:"વેંત", value:12},
+
+{name:"અનાહપદ", eng:"Anahapada", meaning:"દુર્લભ ઉલ્લેખ", value:14},
+
+{name:"રત્નિ", eng:"Ratni", meaning:"પાઠભેદ", value:21},
+
+{name:"હસ્ત", eng:"Hasta", meaning:"કોણીથી મધ્ય આંગળી સુધી", value:24},
+{name:"અરત્નિ", eng:"Aratni", meaning:"હસ્ત", value:24},
+
+{name:"કીષ્કુ", eng:"Kishku", meaning:"૨ રત્નિ", value:42},
+{name:"પુરુષ", eng:"Purusha", meaning:"૨ કીષ્કુ", value:84},
+
+{name:"ધનુષ", eng:"Dhanusha", meaning:"૪ હસ્ત", value:96},
+{name:"દંડ", eng:"Danda", meaning:"ધનુષ સમાન", value:96},
+
+{name:"કોષ", eng:"Krosha", meaning:"૧૦૦૦ ધનુષ", value:96000},
+
+{name:"ગવ્યુતિ", eng:"Gavyuti", meaning:"૨ કોષ", value:192000},
+
+{name:"યોજન", eng:"Yojana", meaning:"૪ કોષ", value:384000}, 
+
+{name:"મિલીમીટર", eng:"Millimeter", meaning:"આધુનિક મેટ્રિક", value:1/19},
+
+{name:"સેન્ટીમીટર", eng:"Centimeter", meaning:"આધુનિક મેટ્રિક", value:1/1.9},
+
+{name:"મીટર", eng:"Meter", meaning:"આધુનિક મેટ્રિક", value:100/1.9},
+
+{name:"કિલોમીટર", eng:"Kilometer", meaning:"આધુનિક મેટ્રિક", value:100000/1.9},
+
+{name:"ઇંચ", eng:"Inch", meaning:"Imperial Unit", value:2.54/1.9},
+
+{name:"ફૂટ", eng:"Foot", meaning:"Imperial Unit", value:30.48/1.9},
+
+{name:"યાર્ડ", eng:"Yard", meaning:"Imperial Unit", value:91.44/1.9},
+
+{name:"માઇલ", eng:"Mile", meaning:"Imperial Unit", value:160934.4/1.9}
+]
+},
+
+weight:{
+base:"રત્તિ",
+description:"આયુર્વેદ અને અર્થશાસ્ત્રની વજન પ્રણાલી",
+units:[
+{name:"રત્તિ", eng:"Ratti", meaning:"ગુન્ઝા બીજ આધારિત", value:1},
+{name:"માષ", eng:"Masha", meaning:"૮ રત્તિ", value:8},
+{name:"સુવર્ણ", eng:"Suvarna", meaning:"૧૨ માષ", value:96},
+{name:"કર્ષ", eng:"Karsha", meaning:"૧૬ માષ", value:128}, 
+
+{name:"રત્તિ", eng:"Ratti", meaning:"ગુન્ઝા બીજ આધારિત", value:1},
+
+{name:"માષ", eng:"Masha", meaning:"૮ રત્તિ", value:8},
+
+{name:"સુવર્ણ", eng:"Suvarna", meaning:"૧૨ માષ", value:96},
+
+{name:"કર્ષ", eng:"Karsha", meaning:"૧૬ માષ", value:128},
+
+{name:"ગ્રામ", eng:"Gram", meaning:"આધુનિક મેટ્રિક", value:1/0.1215},
+
+{name:"કિલોગ્રામ", eng:"Kilogram", meaning:"1000 ગ્રામ", value:1000/0.1215},
+
+{name:"ટન", eng:"Tonne", meaning:"1000 કિલોગ્રામ", value:1000000/0.1215},
+
+{name:"ઔંસ", eng:"Ounce", meaning:"Imperial Weight", value:28.3495/0.1215},
+
+{name:"પાઉન્ડ", eng:"Pound", meaning:"Imperial Weight", value:453.59237/0.1215}
+
+]
+},
+
+volume:{
+base:"કુડવ",
+description:"ધાન્ય અને આયતન માપ",
+units:[
+{name:"કુડવ", eng:"Kudava", meaning:"નાનું ધાન્ય માપ", value:1},
+{name:"પ્રસ્થ", eng:"Prastha", meaning:"૪ કુડવ", value:4},
+{name:"આઢક", eng:"Adhaka", meaning:"૪ પ્રસ્થ", value:16},
+{name:"દ્રોણ", eng:"Drona", meaning:"૪ આઢક", value:64}
+]
+}
+
+};
+
+function loadUnits(){
+
+const category = document.getElementById("category").value;
+
+const select = document.getElementById("unit");
+
+select.innerHTML="";
+
+categories[category].units.forEach(unit=>{
+
+const option=document.createElement("option");
+
+option.value=unit.name;
+
+option.textContent=`${unit.name} (${unit.eng})`;
+
+select.appendChild(option);
+
+});
+
+document.getElementById("baseInfo").innerHTML=
+`<b>શ્રેણી:</b> ${categories[category].description}
+<br>
+<b>આધાર એકમ:</b> ${categories[category].base}`;
+
+convertUnits();
+}
+
+function convertUnits(){
+
+const category=document.getElementById("category").value;
+
+const value=parseFloat(document.getElementById("value").value);
+
+const unitName=document.getElementById("unit").value;
+
+if(isNaN(value)) return;
+
+const units=categories[category].units;
+
+const source=units.find(u=>u.name===unitName);
+
+const baseValue=value*source.value;
+
+let html=`
+<table>
+<tr>
+<th>ગુજરાતી એકમ</th>
+<th>English</th>
+<th>અર્થ</th>
+<th>રૂપાંતરિત મૂલ્ય</th>
+</tr>
+`;
+
+units.forEach(unit=>{
+
+let result=baseValue/unit.value;
+
+let display;
+
+if(Math.abs(result)>=1000000)
+display=result.toExponential(6);
+else
+display=result.toLocaleString("en-US",{
+maximumFractionDigits:15
+});
+
+html+=`
+<tr>
+<td>${unit.name}</td>
+<td>${unit.eng}</td>
+<td>${unit.meaning}</td>
+<td>${display}</td>
+</tr>
+`;
+
+});
+
+html+="</table>";
+
+document.getElementById("results").innerHTML=html;
+}
+
+loadUnits();
+
+document.getElementById("value").addEventListener("input",convertUnits);
+document.getElementById("unit").addEventListener("change",convertUnits);
+
+</script>
+
+</body>
+</html>
